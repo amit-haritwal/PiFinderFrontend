@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shape-cube {
+  transform-style: preserve-3d;
+  transform: rotateX(45deg) rotateY(45deg);
+}
+
+.shape-cube::before,
+.shape-cube::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  opacity: 0.7;
+}
+
+.shape-cube::before {
+  transform: translateZ(-25px);
+}
+
+.shape-cube::after {
+  transform: translateY(-25px) rotateX(90deg);
+}
+
+.shape-pyramid {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transform-style: preserve-3d;
+  transform: rotateX(45deg);
+}
+
+.shape-pyramid::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  opacity: 0.7;
+  transform: translateZ(-25px) rotateX(180deg);
+}
+
+.shape-prism {
+  transform-style: preserve-3d;
+  transform: rotateX(60deg);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+}
+
+.shape-prism::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  opacity: 0.7;
+  transform: translateZ(-15px);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
