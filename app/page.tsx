@@ -106,7 +106,13 @@ export default function Home() {
             <input
               type="number"
               value={number}
-              onChange={(e) => setNumber(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length <= 8) {
+                  setNumber(value);
+                }
+              }}
+              maxLength={8}
               placeholder="Enter a number to find in π"
               className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
             />
