@@ -8,9 +8,9 @@ export default function VantaBackground() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && vantaRef.current) {
-      // @ts-ignore
+      // @ts-expect-error VANTA is loaded from CDN and not available in TypeScript types
       if (window.VANTA) {
-        // @ts-ignore
+        // @ts-expect-error VANTA.BIRDS is a dynamic method added by the CDN script
         window.VANTA.BIRDS({
           el: vantaRef.current,
           mouseControls: true,
