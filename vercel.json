@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api/search", "destination": "http://3.104.223.188:5002/api/search" }
+  ]
+} 

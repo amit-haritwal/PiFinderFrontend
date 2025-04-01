@@ -158,7 +158,7 @@ export default function Home() {
     setError("");
 
     try {
-      const response = await axios.post(`http://3.104.223.188:5002/api/search`, {
+      const response = await axios.post(`/api/search`, {
         pattern: number,
       });
       setResponse(response.data);
