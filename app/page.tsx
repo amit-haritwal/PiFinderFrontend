@@ -9,6 +9,7 @@ import {
   animate,
 } from "framer-motion";
 import axios from "axios";
+import VantaBackground from "./components/VantaBackground";
 
 interface SearchResponse {
   context: {
@@ -22,99 +23,6 @@ interface SearchResponse {
   position: number;
   search_time_seconds: number;
   success: boolean;
-}
-
-function BackgroundShape({ type, color, delay }: { type: string; color: string; delay: number }) {
-  const variants = {
-    initial: { scale: 0, opacity: 0 },
-    animate: { 
-      scale: 1, 
-      opacity: 0.6,
-      x: ['0%', '100%', '0%'],
-      y: ['0%', '50%', '0%'],
-      rotateX: [0, 360],
-      rotateY: [0, 360],
-      rotateZ: [0, 360],
-      transition: {
-        duration: Math.random() * 20 + 10,
-        repeat: Infinity,
-        delay: delay,
-        ease: "linear"
-      }
-    }
-  };
-
-  const shapeStyle = {
-    width: Math.random() * 60 + 20 + 'px',
-    height: Math.random() * 60 + 20 + 'px',
-    backgroundColor: color,
-    position: 'absolute' as const,
-    left: Math.random() * 100 + '%',
-    top: Math.random() * 100 + '%',
-    transform: 'translate(-50%, -50%)',
-  };
-
-  const getShapeClass = () => {
-    switch (type) {
-      case 'cube':
-        return 'shape-cube';
-      case 'pyramid':
-        return 'shape-pyramid';
-      case 'prism':
-        return 'shape-prism';
-      case 'circle':
-        return 'rounded-full';
-      case 'triangle':
-        return 'clip-path-triangle';
-      default:
-        return '';
-    }
-  };
-
-  return (
-    <motion.div
-      style={shapeStyle}
-      variants={variants}
-      initial="initial"
-      animate="animate"
-      className={`backdrop-blur-sm ${getShapeClass()}`}
-    />
-  );
-}
-
-function AnimatedBackground() {
-  const shapes = [
-    // 3D Shapes (more instances for better distribution)
-    { type: 'cube', color: '#6366f1' },
-    { type: 'cube', color: '#8b5cf6' },
-    { type: 'pyramid', color: '#a855f7' },
-    { type: 'pyramid', color: '#d946ef' },
-    { type: 'prism', color: '#06b6d4' },
-    { type: 'prism', color: '#0ea5e9' },
-    // 2D Shapes
-    { type: 'circle', color: '#f43f5e' },
-    { type: 'circle', color: '#ec4899' },
-    { type: 'square', color: '#22c55e' },
-    { type: 'square', color: '#10b981' },
-    { type: 'triangle', color: '#eab308' },
-    { type: 'triangle', color: '#f97316' },
-  ];
-
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none perspective-1000">
-      {[...Array(60)].map((_, i) => {  // Increased from 30 to 60 shapes
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
-        return (
-          <BackgroundShape
-            key={i}
-            type={shape.type}
-            color={shape.color}
-            delay={i * 0.1}  // Reduced delay for smoother initial animation
-          />
-        );
-      })}
-    </div>
-  );
 }
 
 function CountdownNumber({ value }: { value: number }) {
@@ -171,8 +79,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 flex flex-col items-center justify-center p-4 relative">
-      <AnimatedBackground />
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative">
+      <VantaBackground />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
